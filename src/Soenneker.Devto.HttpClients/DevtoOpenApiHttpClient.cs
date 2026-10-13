@@ -27,7 +27,7 @@ public sealed class DevtoOpenApiHttpClient : IDevtoOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(DevtoOpenApiHttpClient), (config: _config, baseUrl: _config["Devto:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("Devto:ApiKey");
+            var apiKey = state.config.GetStringStrict("Devto:ApiKey");
             string authHeaderName = state.config["Devto:AuthHeaderName"] ?? "api-key";
             string authHeaderValueTemplate = state.config["Devto:AuthHeaderValueTemplate"] ?? "{token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
